@@ -30,15 +30,29 @@ const interventionSchema = new mongoose.Schema(
       required: true
     },
 
+    deadlineDays: {
+      type: Number,
+      default: 3
+    },
+
     status: {
       type: String,
-      enum: ["PENDING", "APPROVED", "REJECTED", "COMPLETED"],
+      enum: [
+        "PENDING",
+        "APPROVED",
+        "REJECTED",
+        "COMPLETED"
+      ],
       default: "PENDING"
     },
 
     outcome: {
       type: String,
-      enum: ["IMPROVED", "NO_CHANGE", "WORSENED"],
+      enum: [
+        "IMPROVED",
+        "NO_CHANGE",
+        "WORSENED"
+      ],
       default: undefined
     }
   },
@@ -47,4 +61,7 @@ const interventionSchema = new mongoose.Schema(
   }
 );
 
-module.exports = mongoose.model("Intervention", interventionSchema);
+module.exports = mongoose.model(
+  "Intervention",
+  interventionSchema
+);

@@ -1,17 +1,31 @@
+// Load environment variables first
+require("dotenv").config();
+
 const express = require("express");
 const cors = require("cors");
 const connectDB = require("./config/db");
 
-require("dotenv").config();
+const studentRoutes = require("./routes/studentRoutes");
+const interventionRoutes = require("./routes/interventionRoutes");
+const taskRoutes = require("./routes/taskRoutes");
+const simulationRoutes = require("./routes/simulationRoutes");
+const analyticsRoutes = require("./routes/analyticsRoutes");
 
 const app = express();
 
-// Connect to MongoDB
+// Connect MongoDB
 connectDB();
 
 // Middleware
 app.use(cors());
 app.use(express.json());
+
+// Routes
+app.use("/api/students", studentRoutes);
+app.use("/api/interventions", interventionRoutes);
+app.use("/api/tasks", taskRoutes);
+app.use("/api/simulation", simulationRoutes);
+app.use("/api/analytics", analyticsRoutes);
 
 // Test route
 app.get("/", (req, res) => {
